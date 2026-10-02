@@ -32,6 +32,17 @@ MOD_SHIFT = 0x0004
 MOD_WIN = 0x0008
 
 user32 = ctypes.windll.user32
+shell32 = ctypes.WinDLL("shell32", use_last_error=True)
+shell_execute = shell32.ShellExecuteW
+shell_execute.argtypes = (
+    wintypes.HWND,
+    wintypes.LPCWSTR,
+    wintypes.LPCWSTR,
+    wintypes.LPCWSTR,
+    wintypes.LPCWSTR,
+    ctypes.c_int,
+)
+shell_execute.restype = ctypes.c_void_p
 
 
 DEFAULT_CONFIG = {
@@ -92,8 +103,8 @@ def launch(path):
     if not path:
         return
     try:
-        result = user32.ShellExecuteW(None, "open", path, None, None, 1)
-        if result <= 32:
+        result = shell_execute(None, "open", path, None, None, 1)
+        if result is None or result <= 32:
             os.startfile(path)
     except Exception as e:
         QMessageBox.warning(None, "Erro", f"Não foi possível abrir:\n{path}\n\n{e}")
