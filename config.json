@@ -1,8 +1,14 @@
 {
+    "hotkey": {
+        "modifiers": [
+            "win"
+        ],
+        "key": "apostrophe"
+    },
     "items": [
         {
-            "name": "Discord1",
-            "path": "C:\\Users\\Lucas.Farias\\AppData\\Local\\DiscordCanary\\DiscordCanary.exe"
+            "name": "Discord",
+            "path": "C:\\Program Files\\Discord\\Discord.exe"
         },
         {
             "name": "Steam",
